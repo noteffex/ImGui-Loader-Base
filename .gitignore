@@ -41,3 +41,6 @@
 *.ipch
 *.iobj
 *.ipdb
+
+# Folders
+.vs/
