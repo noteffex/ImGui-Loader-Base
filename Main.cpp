@@ -1,157 +1,120 @@
 #include "Main.h"
 
-void update_colors() {
-	ImGuiStyle* style = &ImGui::GetStyle();
-	style->WindowPadding = ImVec2(15, 15);
-	style->WindowRounding = 5.0f;
-	style->FramePadding = ImVec2(5, 5);
-	style->FrameRounding = 4.0f;
-	style->ItemSpacing = ImVec2(12, 8);
-	style->ItemInnerSpacing = ImVec2(8, 6);
-	style->IndentSpacing = 25.0f;
-	style->ScrollbarSize = 15.0f;
-	style->ScrollbarRounding = 9.0f;
-	style->GrabMinSize = 5.0f;
-	style->GrabRounding = 3.0f;
-	style->ButtonTextAlign = ImVec2(0.5f, 0.5f);
-	style->WindowTitleAlign = ImVec2(0.5f, 0.5f);
+char user_name[255] = "user";
+char pass_word[255] = "pass";
 
-	style->Colors[ImGuiCol_Text] = ImVec4(0.80f, 0.80f, 0.83f, 1.00f);
-	style->Colors[ImGuiCol_TextDisabled] = ImVec4(0.24f, 0.23f, 0.29f, 1.00f);
-	style->Colors[ImGuiCol_WindowBg] = ImVec4(0.06f, 0.05f, 0.07f, 1.00f);
-	style->Colors[ImGuiCol_ChildWindowBg] = ImVec4(0.07f, 0.07f, 0.09f, 1.00f);
-	style->Colors[ImGuiCol_PopupBg] = ImVec4(0.07f, 0.07f, 0.09f, 1.00f);
-	style->Colors[ImGuiCol_Border] = ImVec4(0.80f, 0.80f, 0.83f, 0.88f);
-	style->Colors[ImGuiCol_BorderShadow] = ImVec4(0.92f, 0.91f, 0.88f, 0.00f);
-	style->Colors[ImGuiCol_FrameBg] = ImVec4(0.10f, 0.09f, 0.12f, 1.00f);
-	style->Colors[ImGuiCol_FrameBgHovered] = ImVec4(0.24f, 0.23f, 0.29f, 1.00f);
-	style->Colors[ImGuiCol_FrameBgActive] = ImVec4(0.56f, 0.56f, 0.58f, 1.00f);
-	style->Colors[ImGuiCol_TitleBg] = ImVec4(0.10f, 0.09f, 0.12f, 1.00f);
-	style->Colors[ImGuiCol_TitleBgCollapsed] = ImVec4(1.00f, 0.98f, 0.95f, 0.75f);
-	style->Colors[ImGuiCol_TitleBgActive] = ImVec4(0.07f, 0.07f, 0.09f, 1.00f);
-	style->Colors[ImGuiCol_MenuBarBg] = ImVec4(0.10f, 0.09f, 0.12f, 1.00f);
-	style->Colors[ImGuiCol_ScrollbarBg] = ImVec4(0.10f, 0.09f, 0.12f, 1.00f);
-	style->Colors[ImGuiCol_ScrollbarGrab] = ImVec4(0.80f, 0.80f, 0.83f, 0.31f);
-	style->Colors[ImGuiCol_ScrollbarGrabHovered] = ImVec4(0.56f, 0.56f, 0.58f, 1.00f);
-	style->Colors[ImGuiCol_ScrollbarGrabActive] = ImVec4(0.06f, 0.05f, 0.07f, 1.00f);
-	style->Colors[ImGuiCol_ComboBg] = ImVec4(0.19f, 0.18f, 0.21f, 1.00f);
-	style->Colors[ImGuiCol_CheckMark] = ImVec4(0.80f, 0.80f, 0.83f, 0.31f);
-	style->Colors[ImGuiCol_SliderGrab] = ImVec4(0.80f, 0.80f, 0.83f, 0.31f);
-	style->Colors[ImGuiCol_SliderGrabActive] = ImVec4(0.06f, 0.05f, 0.07f, 1.00f);
-	style->Colors[ImGuiCol_Button] = ImVec4(0.10f, 0.09f, 0.12f, 1.00f);
-	style->Colors[ImGuiCol_ButtonHovered] = ImVec4(0.24f, 0.23f, 0.29f, 1.00f);
-	style->Colors[ImGuiCol_ButtonActive] = ImVec4(0.56f, 0.56f, 0.58f, 1.00f);
-	style->Colors[ImGuiCol_Header] = ImVec4(0.10f, 0.09f, 0.12f, 1.00f);
-	style->Colors[ImGuiCol_HeaderHovered] = ImVec4(0.56f, 0.56f, 0.58f, 1.00f);
-	style->Colors[ImGuiCol_HeaderActive] = ImVec4(0.06f, 0.05f, 0.07f, 1.00f);
-	style->Colors[ImGuiCol_Column] = ImVec4(0.56f, 0.56f, 0.58f, 1.00f);
-	style->Colors[ImGuiCol_ColumnHovered] = ImVec4(0.24f, 0.23f, 0.29f, 1.00f);
-	style->Colors[ImGuiCol_ColumnActive] = ImVec4(0.56f, 0.56f, 0.58f, 1.00f);
-	style->Colors[ImGuiCol_ResizeGrip] = ImVec4(0.00f, 0.00f, 0.00f, 0.00f);
-	style->Colors[ImGuiCol_ResizeGripHovered] = ImVec4(0.56f, 0.56f, 0.58f, 1.00f);
-	style->Colors[ImGuiCol_ResizeGripActive] = ImVec4(0.06f, 0.05f, 0.07f, 1.00f);
-	style->Colors[ImGuiCol_CloseButton] = ImVec4(0.40f, 0.39f, 0.38f, 0.16f);
-	style->Colors[ImGuiCol_CloseButtonHovered] = ImVec4(0.40f, 0.39f, 0.38f, 0.39f);
-	style->Colors[ImGuiCol_CloseButtonActive] = ImVec4(0.40f, 0.39f, 0.38f, 1.00f);
-	style->Colors[ImGuiCol_PlotLines] = ImVec4(0.40f, 0.39f, 0.38f, 0.63f);
-	style->Colors[ImGuiCol_PlotLinesHovered] = ImVec4(0.25f, 1.00f, 0.00f, 1.00f);
-	style->Colors[ImGuiCol_PlotHistogram] = ImVec4(0.40f, 0.39f, 0.38f, 0.63f);
-	style->Colors[ImGuiCol_PlotHistogramHovered] = ImVec4(0.25f, 1.00f, 0.00f, 1.00f);
-	style->Colors[ImGuiCol_TextSelectedBg] = ImVec4(0.25f, 1.00f, 0.00f, 0.43f);
-	style->Colors[ImGuiCol_ModalWindowDarkening] = ImVec4(1.00f, 0.98f, 0.95f, 0.73f);
+void manage_window_movement() {
+    //TODO: Find a better way for moving window than this.
+    if (ImGui::IsItemHovered() || ImGui::IsItemActive()) { should_move_window = false; }
 }
 
-int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmdShow){
-	LPCTSTR lpzClass = LOADER_BRAND;
-	if (!RegMyWindowClass(hInstance, lpzClass)) {
-		return 1;
-	}
+// Main code
+int APIENTRY WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
+{
+    //Calculate the window position of our loader
+    RECT screen_rect;
+    GetWindowRect(GetDesktopWindow(), &screen_rect);
+    int x = (screen_rect.right - WINDOW_WIDTH) / 2;
+    int y = (screen_rect.bottom - WINDOW_HEIGHT) / 2;
 
-	//center the loader
-	RECT screen_rect;
-	GetWindowRect(GetDesktopWindow(), &screen_rect);
-	int x = (screen_rect.right - WINDOW_WIDTH) / 2;
-	int y = (screen_rect.bottom - WINDOW_HEIGHT) / 2;
+    // Create application window
+    WNDCLASSEX wc = { sizeof(WNDCLASSEX), CS_CLASSDC, WndProc, 0L, 0L, GetModuleHandle(NULL), NULL, NULL, NULL, NULL, LOADER_BRAND, NULL };
+    RegisterClassEx(&wc);
+    main_hwnd = CreateWindow(wc.lpszClassName, LOADER_BRAND, WS_POPUP, x, y, WINDOW_WIDTH, WINDOW_HEIGHT, NULL, NULL, wc.hInstance, NULL);
 
-	//window creation
-	hWnd = CreateWindow(lpzClass, LOADER_BRAND, WS_POPUP, x, y, WINDOW_WIDTH, WINDOW_HEIGHT, NULL, NULL, hInstance, NULL);
-	if (!hWnd) {
-		MessageBox(0, "Error", "Window Creation Failed", 0);
-		return 0;
-	}
+    // Initialize Direct3D
+    if (!CreateDeviceD3D(main_hwnd)) {
+        CleanupDeviceD3D();
+        UnregisterClass(wc.lpszClassName, wc.hInstance);
+        return 1;
+    }
 
-	//initialize d3d
-	LPDIRECT3D9 pD3D;
-	if ((pD3D = Direct3DCreate9(D3D_SDK_VERSION)) == NULL) {
-		UnregisterClass(lpzClass, hInstance);
-	}
+    // Show the window
+    ShowWindow(main_hwnd, SW_SHOWDEFAULT);
+    UpdateWindow(main_hwnd);
 
-	ZeroMemory(&g_d3dpp, sizeof(g_d3dpp));
-	g_d3dpp.Windowed = TRUE;
-	g_d3dpp.SwapEffect = D3DSWAPEFFECT_DISCARD;
-	g_d3dpp.BackBufferFormat = D3DFMT_UNKNOWN;
-	g_d3dpp.EnableAutoDepthStencil = TRUE;
-	g_d3dpp.AutoDepthStencilFormat = D3DFMT_D16;
-	g_d3dpp.PresentationInterval = D3DPRESENT_INTERVAL_ONE;
+    // Setup Dear ImGui context
+    ImGui::CreateContext();
+    ImGuiIO& io = ImGui::GetIO();
+    ImGuiStyle& style = ImGui::GetStyle();
 
-	if (pD3D->CreateDevice(D3DADAPTER_DEFAULT, D3DDEVTYPE_HAL, hWnd, D3DCREATE_HARDWARE_VERTEXPROCESSING, &g_d3dpp, &g_pd3dDevice) < 0) {
-		pD3D->Release();
-		UnregisterClass(lpzClass, hInstance);
-		return 0;
-	}
+    // Setup Dear ImGui style
+    ImGui::StyleColorsDark();
+    style.WindowRounding = 0.f;
 
-	ImGui_ImplDX9_Init(hWnd, g_pd3dDevice);
+    // Setup Platform/Renderer bindings
+    ImGui_ImplWin32_Init(main_hwnd);
+    ImGui_ImplDX9_Init(g_pd3dDevice);
 
-	MSG msg;
-	ZeroMemory(&msg, sizeof(msg));
+    //Initialize fonts here
+    io.Fonts->AddFontDefault();
 
-	ShowWindow(hWnd, SW_SHOWDEFAULT);
-	UpdateWindow(hWnd);
+    // Main loop
+    MSG msg;
+    ZeroMemory(&msg, sizeof(msg));
+    while (msg.message != WM_QUIT)
+    {
+        if (!loader_active) ExitProcess(0);
+        if (PeekMessage(&msg, NULL, 0U, 0U, PM_REMOVE)) {
+            TranslateMessage(&msg);
+            DispatchMessage(&msg);
+            continue;
+        }
 
-	//main loop
-	while (msg.message != WM_QUIT)
-	{
-		if (PeekMessage(&msg, NULL, 0U, 0U, PM_REMOVE))
+        // Start the Dear ImGui frame
+        ImGui_ImplDX9_NewFrame();
+        ImGui_ImplWin32_NewFrame();
+        ImGui::NewFrame();
+
+        // Actual rendering starts here
+		DWORD window_flags = ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoSavedSettings | ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoScrollbar;
+
+        ImGui::SetNextWindowPos(ImVec2(0, 0));
+		ImGui::SetNextWindowSize(ImVec2(WINDOW_WIDTH, WINDOW_HEIGHT));
+		ImGui::SetNextWindowBgAlpha(1.0f);
+
+        should_move_window = true;
+        ImGui::Begin(LOADER_BRAND, &loader_active, window_flags);
 		{
-			TranslateMessage(&msg);
-			DispatchMessage(&msg);
-			continue;
-		}
+            ImGui::InputText("Username", user_name, IM_ARRAYSIZE(user_name));
+            manage_window_movement();
+            ImGui::InputText("Password", pass_word, IM_ARRAYSIZE(pass_word), ImGuiInputTextFlags_Password);
+            manage_window_movement();
+            if (ImGui::Button("Login")) {
+                //DO YOUR LOGIN HERE
+            }
+        }
+        ImGui::End();
 
-		ImGui_ImplDX9_NewFrame();
+        ImGui::EndFrame();
+        g_pd3dDevice->Clear(0, NULL, D3DCLEAR_TARGET | D3DCLEAR_ZBUFFER, 0, 1.0f, 0);
 
-		DWORD window_flags = ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoSavedSettings | ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_NoTitleBar;
+        if (g_pd3dDevice->BeginScene() >= 0) {
+            ImGui::Render();
+            ImGui_ImplDX9_RenderDrawData(ImGui::GetDrawData());
+            g_pd3dDevice->EndScene();
+        }
 
-		if (!loader_active) ExitProcess(0);
+        // Handle loss of D3D9 device
+        HRESULT result = g_pd3dDevice->Present(NULL, NULL, NULL, NULL);
+        if (result == D3DERR_DEVICELOST && g_pd3dDevice->TestCooperativeLevel() == D3DERR_DEVICENOTRESET) {
+            ResetDevice();
+        }
+    }
 
-		update_colors();
-		ImGui::Begin(LOADER_BRAND, &loader_active, ImVec2(WINDOW_WIDTH, WINDOW_HEIGHT), 1.0f, window_flags);
-		{
-			ImGui::Text(LOADER_BRAND);
-		}
-		ImGui::End();
+    ImGui_ImplDX9_Shutdown();
+    ImGui_ImplWin32_Shutdown();
+    ImGui::DestroyContext();
 
-		g_pd3dDevice->SetRenderState(D3DRS_ZENABLE, false);
-		g_pd3dDevice->SetRenderState(D3DRS_ALPHABLENDENABLE, false);
-		g_pd3dDevice->SetRenderState(D3DRS_SCISSORTESTENABLE, false);
-		if (g_pd3dDevice->BeginScene() >= 0)
-		{
-			ImGui::Render();
-			g_pd3dDevice->EndScene();
-		}
-		g_pd3dDevice->Present(NULL, NULL, NULL, NULL);
-	}
+    CleanupDeviceD3D();
+    DestroyWindow(main_hwnd);
+    UnregisterClass(wc.lpszClassName, wc.hInstance);
 
-	//clean up
-	ImGui_ImplDX9_Shutdown();
-	if (g_pd3dDevice) g_pd3dDevice->Release();
-	if (pD3D) pD3D->Release();
-	UnregisterClass(LOADER_BRAND, hInstance);
-	return 0;
+    return 0;
 }
 
 LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam) {
-	if (ImGui_ImplDX9_WndProcHandler(hWnd, message, wParam, lParam))
+	if (ImGui_ImplWin32_WndProcHandler(hWnd, message, wParam, lParam))
 		return true;
 
 	switch (message) {
@@ -174,16 +137,71 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam) 
 		PostQuitMessage(0);
 		return 0;
 	}
+
+    if (ImGui::GetCurrentContext()) {
+        static POINTS m;
+        switch (message)
+        {
+        case WM_LBUTTONDOWN:
+            SetCapture(hWnd);
+            m = MAKEPOINTS(lParam);
+            return true;
+        case WM_LBUTTONUP:
+            ReleaseCapture();
+            return true;
+        case WM_MOUSEMOVE:
+            if (wParam == MK_LBUTTON)
+            {
+                if (should_move_window && !ImGui::GetIO().WantTextInput) {
+                    RECT rect;
+                    GetWindowRect(hWnd, &rect);
+                    POINTS p = MAKEPOINTS(lParam);
+
+                    rect.left += p.x - m.x;
+                    rect.top += p.y - m.y;
+
+                    SetWindowPos(hWnd, HWND_TOPMOST, rect.left, rect.top, 0, 0, SWP_SHOWWINDOW | SWP_NOSIZE | SWP_NOZORDER);
+                }
+                else {
+                    m = MAKEPOINTS(lParam);
+                }
+            }
+        }
+    }
+
 	return DefWindowProc(hWnd, message, wParam, lParam);
 }
 
-ATOM RegMyWindowClass(HINSTANCE hInst, LPCTSTR lpzClassName) {
-	WNDCLASS wcWindowClass = { 0 };
-	wcWindowClass.lpfnWndProc = (WNDPROC)WndProc;
-	wcWindowClass.style = CS_HREDRAW | CS_VREDRAW;
-	wcWindowClass.hInstance = hInst;
-	wcWindowClass.lpszClassName = lpzClassName;
-	wcWindowClass.hCursor = LoadCursor(NULL, IDC_ARROW);
-	wcWindowClass.hbrBackground = (HBRUSH)COLOR_APPWORKSPACE;
-	return RegisterClass(&wcWindowClass);
+bool CreateDeviceD3D(HWND hWnd)
+{
+    if ((g_pD3D = Direct3DCreate9(D3D_SDK_VERSION)) == NULL)
+        return false;
+
+    // Create the D3DDevice
+    ZeroMemory(&g_d3dpp, sizeof(g_d3dpp));
+    g_d3dpp.Windowed = TRUE;
+    g_d3dpp.SwapEffect = D3DSWAPEFFECT_DISCARD;
+    g_d3dpp.BackBufferFormat = D3DFMT_UNKNOWN;
+    g_d3dpp.EnableAutoDepthStencil = TRUE;
+    g_d3dpp.AutoDepthStencilFormat = D3DFMT_D16;
+    g_d3dpp.PresentationInterval = D3DPRESENT_INTERVAL_ONE;           // Present with vsync
+    //g_d3dpp.PresentationInterval = D3DPRESENT_INTERVAL_IMMEDIATE;   // Present without vsync, maximum unthrottled framerate
+    if (g_pD3D->CreateDevice(D3DADAPTER_DEFAULT, D3DDEVTYPE_HAL, hWnd, D3DCREATE_HARDWARE_VERTEXPROCESSING, &g_d3dpp, &g_pd3dDevice) < 0)
+        return false;
+    return true;
+}
+
+void CleanupDeviceD3D()
+{
+    if (g_pd3dDevice) { g_pd3dDevice->Release(); g_pd3dDevice = NULL; }
+    if (g_pD3D) { g_pD3D->Release(); g_pD3D = NULL; }
+}
+
+void ResetDevice()
+{
+    ImGui_ImplDX9_InvalidateDeviceObjects();
+    HRESULT hr = g_pd3dDevice->Reset(&g_d3dpp);
+    if (hr == D3DERR_INVALIDCALL)
+        IM_ASSERT(0);
+    ImGui_ImplDX9_CreateDeviceObjects();
 }
