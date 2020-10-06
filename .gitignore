@@ -44,3 +44,5 @@
 
 # Folders
 .vs/
+Debug/
+Release/
