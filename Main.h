@@ -6,9 +6,9 @@
 #include <d3d9.h>
 #pragma comment(lib,"d3d9.lib")
 
-#include "ImGui/imgui.h"
-#include "ImGui/imgui_impl_dx9.h"
-#include "ImGui/imgui_impl_win32.h"
+#include "imgui-docking/imgui.h"
+#include "imgui-docking/imgui_impl_dx9.h"
+#include "imgui-docking/imgui_impl_win32.h"
 
 #define LOADER_BRAND "Loader base by EffeX"
 #define WINDOW_WIDTH  400
