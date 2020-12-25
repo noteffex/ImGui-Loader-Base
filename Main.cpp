@@ -60,6 +60,13 @@ int APIENTRY WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
     //ImFont* font = io.Fonts->AddFontFromFileTTF("c:\\Windows\\Fonts\\ArialUni.ttf", 18.0f, NULL, io.Fonts->GetGlyphRangesJapanese());
     //IM_ASSERT(font != NULL);
 
+    DWORD window_flags = ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoSavedSettings | ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoScrollbar;
+
+    RECT screen_rect;
+    GetWindowRect(GetDesktopWindow(), &screen_rect);
+    auto x = float(screen_rect.right - WINDOW_WIDTH) / 2.f;
+    auto y = float(screen_rect.bottom - WINDOW_HEIGHT) / 2.f;
+
     // Main loop
     MSG msg;
     ZeroMemory(&msg, sizeof(msg));
@@ -77,19 +84,10 @@ int APIENTRY WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
         ImGui_ImplWin32_NewFrame();
         ImGui::NewFrame();
         {
-            // Actual rendering starts here
-            DWORD window_flags = ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoSavedSettings | ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoScrollbar;
-
-            RECT screen_rect;
-            GetWindowRect(GetDesktopWindow(), &screen_rect);
-            auto x = float(screen_rect.right - WINDOW_WIDTH) / 2.f;
-            auto y = float(screen_rect.bottom - WINDOW_HEIGHT) / 2.f;
-
             ImGui::SetNextWindowPos(ImVec2(x, y), ImGuiCond_Once);
             ImGui::SetNextWindowSize(ImVec2(WINDOW_WIDTH, WINDOW_HEIGHT));
             ImGui::SetNextWindowBgAlpha(1.0f);
 
-            should_move_window = true;
             ImGui::Begin(LOADER_BRAND, &loader_active, window_flags);
             {
                 ImGui::InputText("Username", user_name, IM_ARRAYSIZE(user_name));

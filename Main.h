@@ -10,12 +10,11 @@
 #include "imgui-docking/imgui_impl_dx9.h"
 #include "imgui-docking/imgui_impl_win32.h"
 
-#define LOADER_BRAND "Loader base by EffeX"
+#define LOADER_BRAND "Loader base"
 #define WINDOW_WIDTH  400
 #define WINDOW_HEIGHT 300
 
 bool loader_active = true;
-bool should_move_window = false;
 HWND main_hwnd = nullptr;
 
 LPDIRECT3DDEVICE9        g_pd3dDevice;

@@ -21,9 +21,9 @@
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
     <ProjectGuid>{82212CF7-C4EA-436C-ADD5-F7AD56122BF5}</ProjectGuid>
-    <RootNamespace>EffeXMultiLoader</RootNamespace>
+    <RootNamespace>ImGui Loader Base</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
-    <ProjectName>EffeX ImGui loader base</ProjectName>
+    <ProjectName>ImGui Loader base</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -130,7 +130,7 @@
     <ClCompile Include="imgui-docking\imgui_impl_dx9.cpp" />
     <ClCompile Include="imgui-docking\imgui_impl_win32.cpp" />
     <ClCompile Include="imgui-docking\imgui_widgets.cpp" />
-    <ClCompile Include="Main.cpp" />
+    <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="imgui-docking\imconfig.h" />
@@ -141,7 +141,7 @@
     <ClInclude Include="imgui-docking\imstb_rectpack.h" />
     <ClInclude Include="imgui-docking\imstb_textedit.h" />
     <ClInclude Include="imgui-docking\imstb_truetype.h" />
-    <ClInclude Include="Main.h" />
+    <ClInclude Include="main.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
