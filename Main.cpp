@@ -1,15 +1,14 @@
 #include "Main.h"
-
-char user_name[255] = "user";
-char pass_word[255] = "pass";
+#include "ui/ui.hh"
+#include "globals.hh"
 
 // Main code
 int APIENTRY WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 {
     // Create application window
-    WNDCLASSEX wc = { sizeof(WNDCLASSEX), CS_CLASSDC, WndProc, 0L, 0L, GetModuleHandle(NULL), NULL, NULL, NULL, NULL, LOADER_BRAND, NULL };
+    WNDCLASSEX wc = { sizeof(WNDCLASSEX), CS_CLASSDC, WndProc, 0L, 0L, GetModuleHandle(NULL), NULL, NULL, NULL, NULL, ui::window_title, NULL };
     RegisterClassEx(&wc);
-    main_hwnd = CreateWindow(wc.lpszClassName, LOADER_BRAND, WS_POPUP, 0, 0, 5, 5, NULL, NULL, wc.hInstance, NULL);
+    main_hwnd = CreateWindow(wc.lpszClassName, ui::window_title, WS_POPUP, 0, 0, 5, 5, NULL, NULL, wc.hInstance, NULL);
 
     // Initialize Direct3D
     if (!CreateDeviceD3D(main_hwnd)) {
@@ -28,10 +27,6 @@ int APIENTRY WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
     ImGuiIO& io = ImGui::GetIO();
     io.IniFilename = nullptr; //crutial for not leaving the imgui.ini file
     io.ConfigFlags |= ImGuiConfigFlags_ViewportsEnable; // Enable Multi-Viewport / Platform Windows
-
-    // Setup Dear ImGui style
-    ImGui::StyleColorsDark();
-    //ImGui::StyleColorsClassic();
 
     // When viewports are enabled we tweak WindowRounding/WindowBg so platform windows can look identical to regular ones.
     ImGuiStyle& style = ImGui::GetStyle();
@@ -60,13 +55,6 @@ int APIENTRY WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
     //ImFont* font = io.Fonts->AddFontFromFileTTF("c:\\Windows\\Fonts\\ArialUni.ttf", 18.0f, NULL, io.Fonts->GetGlyphRangesJapanese());
     //IM_ASSERT(font != NULL);
 
-    DWORD window_flags = ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoSavedSettings | ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoScrollbar;
-
-    RECT screen_rect;
-    GetWindowRect(GetDesktopWindow(), &screen_rect);
-    auto x = float(screen_rect.right - WINDOW_WIDTH) / 2.f;
-    auto y = float(screen_rect.bottom - WINDOW_HEIGHT) / 2.f;
-
     // Main loop
     MSG msg;
     ZeroMemory(&msg, sizeof(msg));
@@ -84,19 +72,14 @@ int APIENTRY WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
         ImGui_ImplWin32_NewFrame();
         ImGui::NewFrame();
         {
-            ImGui::SetNextWindowPos(ImVec2(x, y), ImGuiCond_Once);
-            ImGui::SetNextWindowSize(ImVec2(WINDOW_WIDTH, WINDOW_HEIGHT));
-            ImGui::SetNextWindowBgAlpha(1.0f);
-
-            ImGui::Begin(LOADER_BRAND, &loader_active, window_flags);
-            {
-                ImGui::InputText("Username", user_name, IM_ARRAYSIZE(user_name));
-                ImGui::InputText("Password", pass_word, IM_ARRAYSIZE(pass_word), ImGuiInputTextFlags_Password);
-                if (ImGui::Button("Login")) {
-                    //DO YOUR LOGIN HERE
-                }
+            static int init = false;
+            if (!init) {
+                ui::init(g_pd3dDevice);
+                init = true;
             }
-            ImGui::End();
+            else {
+                ui::render();
+            }
         }
         ImGui::EndFrame();
 
@@ -121,7 +104,7 @@ int APIENTRY WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
         if (result == D3DERR_DEVICELOST && g_pd3dDevice->TestCooperativeLevel() == D3DERR_DEVICENOTRESET) {
             ResetDevice();
         }
-        if (!loader_active) {
+        if (!globals.active) {
             msg.message = WM_QUIT;
         }
     }

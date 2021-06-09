@@ -21,6 +21,7 @@
     </ClCompile>
     <ClCompile Include="main.cpp" />
     <ClCompile Include="imgui\imgui_tables.cpp" />
+    <ClCompile Include="ui\ui.cc" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="imgui\imconfig.h">
@@ -48,6 +49,8 @@
       <Filter>imgui</Filter>
     </ClInclude>
     <ClInclude Include="main.h" />
+    <ClInclude Include="ui\ui.hh" />
+    <ClInclude Include="globals.hh" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="imgui">
