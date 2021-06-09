@@ -4,6 +4,7 @@
 #include "../imgui/imgui_internal.h"
 
 void ui::render() {
+    if (!globals.active) return;
 
     ImGui::SetNextWindowPos(ImVec2(window_pos.x, window_pos.y), ImGuiCond_Once);
     ImGui::SetNextWindowSize(ImVec2(window_size.x, window_size.y));
